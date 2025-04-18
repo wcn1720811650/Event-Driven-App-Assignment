@@ -1,16 +1,23 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
+import { StorageConstruct } from './constructs/storage-construct';
+import { MessagingConstruct } from './constructs/messaging-construct';
+import { LambdaConstruct } from './constructs/lambda-construct';
 
 export class EventDrivenStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
+    const storage = new StorageConstruct(this, 'Storage');
 
-    // example resource
-    // const queue = new sqs.Queue(this, 'EventDrivenQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
+    const messaging = new MessagingConstruct(this, 'Messaging');
+
+    const lambdas = new LambdaConstruct(this, 'Lambdas', {
+      bucket: storage.imageBucket,
+      table: storage.imageTable,
+      topic: messaging.imageTopic,
+      queue: messaging.imageQueue,
+      dlq: messaging.imageDLQ,
+    });
   }
 }

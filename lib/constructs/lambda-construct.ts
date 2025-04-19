@@ -55,7 +55,7 @@ export class LambdaConstruct extends Construct {
     const addMetadataLambda = new lambda.Function(this, 'AddMetadataLambda', {
       runtime: lambda.Runtime.NODEJS_18_X,
       handler: 'index.handler',
-      code: lambda.Code.fromAsset('lambda/add-metadata'),
+      code: lambda.Code.fromAsset('lambda/add-metadata'),  
       environment: {
         TABLE_NAME: props.table.tableName,
       },

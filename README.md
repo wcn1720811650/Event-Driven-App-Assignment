@@ -12,3 +12,8 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 * `npx cdk deploy`  deploy this stack to your default AWS account/region
 * `npx cdk diff`    compare deployed stack with current state
 * `npx cdk synth`   emits the synthesized CloudFormation template
+add-metadata
+
+aws sns list-topics --region eu-west-1
+
+aws sns publish --topic-arn "ARN" --message-attributes file://d:/SETU/distrubuted/Event-Driven/attributes.json --message file://d:/SETU/distrubuted/Event-Driven/message.json --region eu-west-1

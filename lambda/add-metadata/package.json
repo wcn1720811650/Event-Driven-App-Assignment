@@ -1,0 +1,10 @@
+{
+  "name": "add-metadata",
+  "version": "1.0.0",
+  "description": "Lambda function to add metadata to images",
+  "main": "index.js",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.0.0",
+    "@aws-sdk/util-dynamodb": "^3.0.0"
+  }
+}

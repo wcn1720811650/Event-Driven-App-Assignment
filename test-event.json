@@ -1,0 +1,7 @@
+{
+  "Records": [
+    {
+      "body": "{\"Message\":\"{\\\"Records\\\":[{\\\"s3\\\":{\\\"bucket\\\":{\\\"name\\\":\\\"eventdrivenstack-storageimagebucket99ba9550-8s6hjb6r9lql\\\"},\\\"object\\\":{\\\"key\\\":\\\"invalid-image.jpeg\\\"}}}]}\"}"
+    }
+  ]
+}

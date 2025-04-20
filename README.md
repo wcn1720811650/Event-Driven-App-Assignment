@@ -12,8 +12,14 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 * `npx cdk deploy`  deploy this stack to your default AWS account/region
 * `npx cdk diff`    compare deployed stack with current state
 * `npx cdk synth`   emits the synthesized CloudFormation template
-add-metadata
 
+## add-metadata
 aws sns list-topics --region eu-west-1
 
 aws sns publish --topic-arn "ARN" --message-attributes file://d:/SETU/distrubuted/Event-Driven/attributes.json --message file://d:/SETU/distrubuted/Event-Driven/message.json --region eu-west-1
+
+## remove-image
+
+aws lambda invoke --function-name EventDrivenStack-LambdasRemoveImageLambdaAF08F1CD-j2doTeAXePAc --cli-binary-format raw-in-base64-out --payload file://d:/SETU/distrubuted/Event-Driven/test-event.json --region eu-west-1 output.json
+
+aws lambda invoke --function-name EventDrivenStack-LambdasRemoveImageLambdaAF08F1CD-j2doTeAXePAc --cli-binary-format raw-in-base64-out --payload file://d:/SETU/distrubuted/Event-Driven/test-event.json --region eu-west-1 output.json

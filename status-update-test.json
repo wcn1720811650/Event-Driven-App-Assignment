@@ -1,0 +1,27 @@
+{
+  "Records": [
+    {
+      "EventSource": "aws:sns",
+      "EventVersion": "1.0",
+      "EventSubscriptionArn": "arn:aws:sns:eu-west-1:034362055613:EventDrivenStack-MessagingImageTopic0CDB1E4D-CZvJDZnyKlGP:b5b108b4-17b1-472a-82c6-6078aa5a3633",
+      "Sns": {
+        "Type": "Notification",
+        "MessageId": "78cc9c7d-a48f-5b9a-9c63-fc001d07bca0",
+        "TopicArn": "arn:aws:sns:eu-west-1:034362055613:EventDrivenStack-MessagingImageTopic0CDB1E4D-CZvJDZnyKlGP",
+        "Subject": null,
+        "Message": "{\"id\":\"example-image.jpeg\",\"status\":\"Approved\",\"photographer\":\"John Doe\",\"caption\":\"Beautiful sunset\"}",
+        "Timestamp": "2025-04-20T14:46:32.541Z",
+        "SignatureVersion": "1",
+        "Signature": "signature",
+        "SigningCertUrl": "url",
+        "UnsubscribeUrl": "url",
+        "MessageAttributes": {
+          "eventType": {
+            "Type": "String",
+            "Value": "StatusUpdate"
+          }
+        }
+      }
+    }
+  ]
+}

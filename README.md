@@ -23,3 +23,7 @@ aws sns publish --topic-arn "ARN" --message-attributes file://d:/SETU/distrubute
 aws lambda invoke --function-name EventDrivenStack-LambdasRemoveImageLambdaAF08F1CD-j2doTeAXePAc --cli-binary-format raw-in-base64-out --payload file://d:/SETU/distrubuted/Event-Driven/test-event.json --region eu-west-1 output.json
 
 aws lambda invoke --function-name EventDrivenStack-LambdasRemoveImageLambdaAF08F1CD-j2doTeAXePAc --cli-binary-format raw-in-base64-out --payload file://d:/SETU/distrubuted/Event-Driven/test-event.json --region eu-west-1 output.json
+
+## Status Update Mailer
+
+aws lambda invoke --function-name EventDrivenStack-LambdasStatusUpdateMailerLambda6E-ayLOqlcAY2P0  --cli-binary-format raw-in-base64-out --payload file://d:/SETU/distrubuted/Event-Driven/status-update-test.json --region eu-west-1 status-output.json

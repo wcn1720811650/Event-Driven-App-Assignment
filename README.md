@@ -35,3 +35,8 @@ aws lambda invoke --function-name EventDrivenStack-LambdasRemoveImageLambdaAF08F
 ## Status Update Mailer
 
 aws lambda invoke --function-name EventDrivenStack-LambdasStatusUpdateMailerLambda6E-ayLOqlcAY2P0  --cli-binary-format raw-in-base64-out --payload file://d:/SETU/distrubuted/Event-Driven/status-update-test.json --region eu-west-1 status-output.json
+
+## Status updating
+aws lambda list-functions --query "Functions[?contains(FunctionName, 'UpdateStatusLambda')].FunctionName" --region eu-west-1
+
+aws lambda invoke --function-name FunctionName --cli-binary-format raw-in-base64-out --payload file://d:\SETU\distrubuted\Event-Driven\update-status-test.json --region eu-west-1 update-status-output.json

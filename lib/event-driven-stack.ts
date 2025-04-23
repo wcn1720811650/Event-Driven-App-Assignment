@@ -1,4 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
+import * as sns from 'aws-cdk-lib/aws-sns';
+import * as sns_subscriptions from 'aws-cdk-lib/aws-sns-subscriptions';
 import { Construct } from 'constructs';
 import { StorageConstruct } from './constructs/storage-construct';
 import { MessagingConstruct } from './constructs/messaging-construct';
@@ -19,5 +21,7 @@ export class EventDrivenStack extends cdk.Stack {
       queue: messaging.imageQueue,
       dlq: messaging.imageDLQ,
     });
+
+
   }
 }

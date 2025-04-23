@@ -7,6 +7,7 @@ import * as sqs from 'aws-cdk-lib/aws-sqs';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as lambdaEventSources from 'aws-cdk-lib/aws-lambda-event-sources';
 import * as subscriptions from 'aws-cdk-lib/aws-sns-subscriptions';
+import * as path from 'path'; 
 
 interface LambdaConstructProps {
   bucket: s3.Bucket;
@@ -17,6 +18,11 @@ interface LambdaConstructProps {
 }
 
 export class LambdaConstruct extends Construct {
+  public readonly logImageLambda: lambda.Function;
+  public readonly removeImageLambda: lambda.Function;
+  public readonly updateStatusLambda: lambda.Function;
+  public readonly statusUpdateMailerLambda: lambda.Function; 
+
   constructor(scope: Construct, id: string, props: LambdaConstructProps) {
     super(scope, id);
 
@@ -89,22 +95,27 @@ export class LambdaConstruct extends Construct {
     props.topic.addSubscription(
       new subscriptions.LambdaSubscription(updateStatusLambda, {
         filterPolicy: {
+          eventType: sns.SubscriptionFilter.stringFilter({
+            allowlist: ['StatusUpdate']
+          })
         },
       })
     );
 
-    const statusUpdateMailerLambda = new lambda.Function(this, 'StatusUpdateMailerLambda', {
+    
+    this.statusUpdateMailerLambda = new lambda.Function(this, 'StatusUpdateMailerLambda', {
       runtime: lambda.Runtime.NODEJS_18_X,
       handler: 'index.handler',
-      code: lambda.Code.fromAsset('lambda/status-update-mailer'),
+      code: lambda.Code.fromAsset(path.join(__dirname, '../../lambda/status-update-mailer')),
       environment: {
-        TABLE_NAME: props.table.tableName,
-      },
+      }
     });
 
-    props.table.grantReadData(statusUpdateMailerLambda);
+    props.topic.grantPublish(this.statusUpdateMailerLambda);
     
-    statusUpdateMailerLambda.addToRolePolicy(
+    props.table.grantReadData(this.statusUpdateMailerLambda); 
+    
+    this.statusUpdateMailerLambda.addToRolePolicy( 
       new iam.PolicyStatement({
         actions: ['ses:SendEmail', 'ses:SendRawEmail'],
         resources: ['*'],
@@ -112,7 +123,7 @@ export class LambdaConstruct extends Construct {
     );
 
     props.topic.addSubscription(
-      new subscriptions.LambdaSubscription(statusUpdateMailerLambda, {
+      new subscriptions.LambdaSubscription(this.statusUpdateMailerLambda, { 
         filterPolicy: {
           eventType: sns.SubscriptionFilter.stringFilter({
             allowlist: ['StatusUpdate'],

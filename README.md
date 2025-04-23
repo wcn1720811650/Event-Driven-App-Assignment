@@ -13,6 +13,14 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 * `npx cdk diff`    compare deployed stack with current state
 * `npx cdk synth`   emits the synthesized CloudFormation template
 
+## Log new Images
+//find the lambda function name
+
+aws lambda list-functions --query "Functions[?contains(FunctionName, 'LogImageLambda')].FunctionName" --region eu-west-1
+
+aws lambda invoke --function-name 
+function name --cli-binary-format raw-in-base64-out --payload file://d:\SETU\distrubuted\Event-Driven\log-image-test.json --region eu-west-1 log-output.json
+
 ## add-metadata
 aws sns list-topics --region eu-west-1
 
